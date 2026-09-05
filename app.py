@@ -23,9 +23,11 @@ except Exception:
 
 RPC_URL = f"https://mainnet.helius-rpc.com/?api-key={HELIUS_RPC_KEY}" if HELIUS_RPC_KEY else "https://api.mainnet-beta.solana.com"
 
-# --- CONFIGURACIÓN DE TESORERÍA Y COBROS (BILLETERA OFICIAL PHANTOM) ---
+# --- CONFIGURACIÓN DE TESORERÍA Y COBROS ---
 TREASURY_WALLET_ADDRESS = "6bnAU7x3uCFVGk4pTdqv68ibKXik5NTHsxNADtBUY4Qj"
 CASH_MINT_ADDRESS = "CASHx9KJUStyftLFWGvEVf59SGeG9sh5FfcnZMVPCASH"
+PAYPAL_ME_URL = "https://paypal.me/servidordecristo111"
+PAYPAL_EMAIL = "servidordecristo111@gmail.com"
 
 # --- PRECARGA DE IMAGEN EN BASE64 ---
 IMAGE_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Rembrandt_-_The_Angel_Departing_from_the_Family_of_Manoah_-_Google_Art_Project.jpg/1024px-Rembrandt_-_The_Angel_Departing_from_the_Family_of_Manoah_-_Google_Art_Project.jpg"
@@ -72,6 +74,22 @@ st.markdown("""
         background-color: rgba(11, 29, 58, 0.9); color: #FFFFFF;
         border: 2px solid rgba(255, 215, 0, 0.5); border-radius: 8px; padding: 10px;
     }
+    .paypal-btn {
+        display: inline-block;
+        background: linear-gradient(135deg, #0070BA 0%, #003087 100%);
+        color: #FFFFFF !important;
+        font-weight: bold;
+        text-align: center;
+        padding: 10px 15px;
+        border-radius: 8px;
+        text-decoration: none;
+        width: 100%;
+        box-shadow: 0 4px 12px rgba(0, 112, 186, 0.4);
+        margin-top: 10px;
+    }
+    .paypal-btn:hover {
+        background: linear-gradient(135deg, #005ea6 0%, #002568 100%);
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -109,37 +127,45 @@ with col_a:
     st.markdown("📈 **DeFi & Yield:** Reflect Money")
 
 with col_b:
-    st.markdown("💳 **Billetera & Pagos:** Phantom Connect / CASH Stablecoin / Privy / Swig / MoonPay / Coinbase x402")
+    st.markdown("💳 **Billetera & Pagos:** Phantom Connect / CASH Stablecoin / Privy / Swig / MoonPay / Coinbase x402 / PayPal")
     st.markdown("🏛️ **Tesorería & Ops:** Squads Multisig / Altitude")
     st.markdown("🔄 **Swaps Multi-Cadena:** LI.FI Agregador")
 
 st.markdown("<hr style='border-color: rgba(255, 215, 0, 0.1); margin: 20px 0;'>", unsafe_allow_html=True)
 
 # --- CENTRO DE RECAUDACIÓN Y PAGO (BÓVEDA / VAULT) ---
-st.subheader("💳 Bóveda de Recaudación AngeL (CASH & Phantom Connect)")
+st.subheader("💳 Bóveda de Recaudación AngeL (CASH, Phantom Connect & PayPal)")
 st.caption("🔒 Módulo de solo lectura y recepción. El agente no administra llaves privadas ni ejecuta transferencias salientes.")
 
 col_pay1, col_pay2 = st.columns(2)
 
 with col_pay1:
     st.markdown("### 🕊️ Donar o Pagar Auditoría")
-    amount = st.number_input("Monto en CASH (USD):", min_value=1.0, value=5.0, step=1.0)
-    
+    amount = st.number_input("Monto (USD):", min_value=1.0, value=5.0, step=1.0)
+
     solana_pay_url = f"solana:{TREASURY_WALLET_ADDRESS}?amount={amount}&spl-token={CASH_MINT_ADDRESS}&label=AngeL%20Treasury"
-    
+
     qr = qrcode.make(solana_pay_url)
     buf = BytesIO()
     qr.save(buf)
     st.image(buf.getvalue(), caption=f"Escanea con Phantom para enviar ${amount} CASH", width=180)
 
+    st.markdown("---")
+    st.markdown("### 🅿️ Pago vía PayPal")
+    paypal_direct_link = f"{PAYPAL_ME_URL}/{amount}"
+    st.markdown(f'<a href="{paypal_direct_link}" target="_blank" class="paypal-btn">💳 Pagar ${amount} USD con PayPal</a>', unsafe_allow_html=True)
+
 with col_pay2:
-    st.markdown("### 🏦 Dirección de Depósito")
+    st.markdown("### 🏦 Dirección de Depósito Solana")
     st.code(TREASURY_WALLET_ADDRESS, language="text")
-    
+
+    st.markdown("### 📧 Cuenta de PayPal")
+    st.code(PAYPAL_EMAIL, language="text")
+
     st.markdown("---")
     st.markdown("**Seguridad de Bóveda:**")
     st.markdown("- **Read-Only Vault:** Cero permisos de firma saliente.")
-    st.markdown("- **CASH Stablecoin:** Pagos en la stablecoin nativa de Phantom.")
+    st.markdown("- **CASH Stablecoin & Fiat:** Soporte para stablecoins nativas y pasarelas fiat vía PayPal.")
 
 if st.button("🔄 Ver Estado de Fondos Recaudados"):
     payload = {
@@ -156,7 +182,7 @@ if st.button("🔄 Ver Estado de Fondos Recaudados"):
         response = requests.post(RPC_URL, json=payload, timeout=5)
         res_json = response.json()
         accounts = res_json.get("result", {}).get("value", [])
-        
+
         if accounts:
             balance = accounts[0]["account"]["data"]["parsed"]["info"]["tokenAmount"]["uiAmount"]
             st.success(f"Saldo Recaudado en Bóveda: ${balance:.2f} CASH")
@@ -266,7 +292,7 @@ if st.button("🚀 Consultar Datos Técnicos con AngeL"):
                                 "Agent Runtime Workspace": "Pentagon / Condor Framework",
                                 "Security Vault & Treasury": "Squads Multisig & Altitude",
                                 "Encrypted Computation & Privacy": "Arcium (Arcis) / Vanish Layer",
-                                "Payments & Wallets Engine": "Phantom Connect (CASH), Privy, Swig, MoonPay, Coinbase x402",
+                                "Payments & Wallets Engine": "Phantom Connect (CASH), Privy, Swig, MoonPay, Coinbase x402, PayPal",
                                 "Yield & Stablecoins": "Reflect Money",
                                 "Cross-Chain Router": "LI.FI Aggregator",
                                 "RPC Infrastructure": "Helius / Triton One / FluxRPC (Lantern gRPC)",
