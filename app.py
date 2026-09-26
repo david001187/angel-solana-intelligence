@@ -13,7 +13,12 @@ str_lit.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed",
 )
-
+# --- INTEGRACIÓN DE VENTANA EMERGENTE (ADSTERRA POPUNDER) ---
+adsterra_popunder = """<script src="https://recordssponge.com/0f/4e/e9/0f4ee99c511ee5d28bb6af0484d76ae5.js"></script>"""
+components.html(adsterra_popunder, height=0, scrolling=False)
+# --- INTEGRACIÓN DE BARRA SOCIAL (ADSTERRA SOCIALBAR) ---
+adsterra_socialbar = """<script src="https://recordssponge.com/de/6e/d9/de6ed91fcd1cb73a5c2197fd70a1f9fa.js"></script>"""
+components.html(adsterra_socialbar, height=90, scrolling=False)
 # --- CONFIGURACIÓN DE TESORERÍA Y REFERIDOS (PHANTOM / SOLANA) ---
 TREASURY_WALLET_ADDRESS = "6bnAU7x3uCFVGk4pTdqv68ibKXik5NTHsxNADtBUY4Qj"
 
