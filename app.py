@@ -15,9 +15,6 @@ str_lit.set_page_config(
     initial_sidebar_state="expanded",
 )
 # --- INYECCIÓN DE META TAG COINZILLA ---
-<meta name="coinzilla" content="ca3abf5c25d7900a7964fb9f3a57ee2a" />
-
-# --- INYECCIÓN DE META TAG COINZILLA ---
 components.html(
     '<meta name="coinzilla" content="ca3abf5c25d7900a7964fb9f3a57ee2a" />',
     height=0,
