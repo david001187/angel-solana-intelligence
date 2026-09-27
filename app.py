@@ -347,7 +347,6 @@ if str_lit.button("✨ Consultar Auditoría en Vivo con AngeL"):
                 freeze_auth_html = "• <b>Freeze Authority:</b> No disponible temporalmente<br>"
 
             pair_data = None
-            token_icon_url = ""
             try:
                 res = requests.get(
                     f"https://api.dexscreener.com/latest/dex/tokens/{query}",
@@ -356,7 +355,6 @@ if str_lit.button("✨ Consultar Auditoría en Vivo con AngeL"):
                 pairs = res.json().get("pairs", [])
                 if pairs:
                     pair_data = pairs[0]
-                    token_icon_url = pair_data.get("info", {}).get("imageUrl", "")
                 else:
                     res_search = requests.get(
                         f"https://api.dexscreener.com/latest/dex/search?q={query}",
@@ -369,7 +367,6 @@ if str_lit.button("✨ Consultar Auditoría en Vivo con AngeL"):
                     ]
                     if solana_pairs:
                         pair_data = solana_pairs[0]
-                        token_icon_url = pair_data.get("info", {}).get("imageUrl", "")
             except Exception:
                 pass
 
@@ -383,12 +380,13 @@ if str_lit.button("✨ Consultar Auditoría en Vivo con AngeL"):
                 fdv = pair_data.get("fdv", 0)
                 dex_name = pair_data.get("dexId", "DEX").upper()
 
-                logo_html = f"<img src='{token_icon_url}' width='32' height='32' style='border-radius:50%; vertical-align:middle; margin-right:10px; background:#fff; object-fit:contain;' onerror=\"this.style.display='none';\">" if token_icon_url else "<span style='font-size:1.5rem; margin-right:8px;'>🪽</span>"
+                # Emblema exclusivo de Alitas de Ángel (🪽)
+                logo_html = "<span style='font-size:1.5rem; margin-right:8px;'>🪽</span>"
 
                 str_lit.markdown(
                     f"""
                     <div class='data-metric-box'>
-                        <h3 style='color: #FACC15; margin-top:0;'>{logo_html}📊 Radiografía de Mercado y Contrato del Token</h3>
+                        <h3 style='color: #FACC15; margin-top:0;'>{logo_html}Radiografía de Mercado y Contrato del Token</h3>
                         <hr style='border-color: rgba(250, 204, 21, 0.4);'>
                         • <b>Nombre del Token:</b> {token_name} ({token_symbol})<br>
                         <div class='info-tooltip'><b>¿Qué significa?:</b> Nombre oficial y símbolo registrado en el contrato de la blockchain.</div>
