@@ -17,6 +17,12 @@ str_lit.set_page_config(
 # --- INYECCIÓN DE META TAG COINZILLA ---
 <meta name="coinzilla" content="ca3abf5c25d7900a7964fb9f3a57ee2a" />
 
+# --- INYECCIÓN DE META TAG COINZILLA ---
+components.html(
+    '<meta name="coinzilla" content="ca3abf5c25d7900a7964fb9f3a57ee2a" />',
+    height=0,
+)
+
 # --- CONFIGURACIÓN DE TESORERÍA Y REFERIDOS (PHANTOM / SOLANA) ---
 TREASURY_WALLET_ADDRESS = "6bnAU7x3uCFVGk4pTdqv68ibKXik5NTHsxNADtBUY4Qj"
 
@@ -629,8 +635,8 @@ elif menu_choice == "📈 Monitoreo de Mercado":
                             <th style='padding: 14px; color: #FACC15; text-shadow: 0 0 10px rgba(250, 204, 21, 0.8); background: rgba(30, 58, 138, 0.95);'>Token / Proyecto</th>
                             <th style='padding: 14px; color: #FACC15; text-shadow: 0 0 10px rgba(250, 204, 21, 0.8); background: rgba(30, 58, 138, 0.95);'>Precio (USD)</th>
                             <th style='padding: 14px; color: #38BDF8; text-shadow: 0 0 10px rgba(56, 189, 248, 0.8); background: rgba(30, 58, 138, 0.95);'>Cambio (24h)</th>
-                            <th style='padding: 14px; color: #38BDF8; text-shadow: 0 0 10px rgba(56, 189, 248, 0.8); background: rgba(30, 58, 138, 0.95);'>Volumen (24h)</th>
-                            <th style='padding: 14px; color: #FFFFFF; text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); background: rgba(30, 58, 138, 0.95);'>Mint Address (Contrato)</th>
+                            <th style='padding: 14px; color: #FACC15; text-shadow: 0 0 10px rgba(250, 204, 21, 0.8); background: rgba(30, 58, 138, 0.95);'>Volumen (24h)</th>
+                            <th style='padding: 14px; color: #FACC15; text-shadow: 0 0 10px rgba(250, 204, 21, 0.8); background: rgba(30, 58, 138, 0.95);'>Mint Address</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -641,46 +647,33 @@ elif menu_choice == "📈 Monitoreo de Mercado":
         """
         str_lit.markdown(live_table_container, unsafe_allow_html=True)
     else:
-        str_lit.warning("No se encontraron tokens activos que coincidan con la búsqueda en este momento.")
+        str_lit.info("No se encontraron tokens que coincidan con la búsqueda actual.")
 
 elif menu_choice == "⚡ Red y Referidos Oficiales":
-    # --- SECCIÓN 3: PROTOCOLOS Y 10 REFERIDOS OFICIALES ---
-    str_lit.subheader("⚡ Protocolos y Red (10 Referidos Oficiales)")
+    # --- SECCIÓN 3: RED DE REFERIDOS Y PROTOCOLOS OFICIALES ---
+    str_lit.subheader("⚡ Ecosistema Solana, DEXs y Herramientas Oficiales")
     str_lit.markdown(
-        "<p style='font-size: 0.9rem; color: #FFFFFF;'>Acceso directo a herramientas de infraestructura, agregadores y bots integrados con tu wallet de referidos.</p>",
+        "<p style='font-size: 0.9rem; color: #FFFFFF;'>Accede directamente a los principales protocolos de intercambio descentralizado, desarrolladores y herramientas avanzadas de Solana.</p>",
         unsafe_allow_html=True,
     )
 
-    col_r1, col_r2 = str_lit.columns(2)
+    col1, col2 = str_lit.columns(2)
+    with col1:
+        str_lit.markdown("#### 🪐 DEXs & Agregadores de Swap")
+        str_lit.link_button("Jupiter Aggregator Swap", JUPITER_ROUTER_URL)
+        str_lit.link_button("Raydium Liquidity Pool", RAYDIUM_ROUTER_URL)
+        str_lit.link_button("Orca Whirlpools", ORCA_ROUTER_URL)
+        str_lit.link_button("Meteora Dynamic Vaults", METEORA_ROUTER_URL)
 
-    with col_r1:
-        str_lit.markdown("<div class='content-card'><h4>🪐 Jupiter Aggregator</h4></div>", unsafe_allow_html=True)
-        str_lit.link_button("Abrir Jupiter Router", JUPITER_ROUTER_URL)
+        str_lit.markdown("#### 🤖 Bots de Trading & Sniping")
+        str_lit.link_button("Banana Gun Bot (Telegram)", BANANA_GUN_BOT_URL)
+        str_lit.link_button("Maestro Sniper Bot", MAESTRO_BOT_URL)
+        str_lit.link_button("BullX Terminal", BULKR_TRADING_URL)
 
-        str_lit.markdown("<div class='content-card'><h4>🌊 Orca Protocol</h4></div>", unsafe_allow_html=True)
-        str_lit.link_button("Abrir Orca DEX", ORCA_ROUTER_URL)
-
-        str_lit.markdown("<div class='content-card'><h4>⚡ Raydium Protocol</h4></div>", unsafe_allow_html=True)
-        str_lit.link_button("Abrir Raydium Swap", RAYDIUM_ROUTER_URL)
-
-        str_lit.markdown("<div class='content-card'><h4>🌐 Meteora AG</h4></div>", unsafe_allow_html=True)
-        str_lit.link_button("Abrir Meteora App", METEORA_ROUTER_URL)
-
-        str_lit.markdown("<div class='content-card'><h4>📊 Solana Tracker</h4></div>", unsafe_allow_html=True)
-        str_lit.link_button("Abrir Solana Tracker", SOLANA_TRACKER_URL)
-
-    with col_r2:
-        str_lit.markdown("<div class='content-card'><h4>🛠️ Helius Developer</h4></div>", unsafe_allow_html=True)
-        str_lit.link_button("Abrir Helius RPC", HELIUS_DEV_URL)
-
-        str_lit.markdown("<div class='content-card'><h4>👻 Phantom Wallet</h4></div>", unsafe_allow_html=True)
-        str_lit.link_button("Abrir Phantom", PHANTOM_AFFILIATE_URL)
-
-        str_lit.markdown("<div class='content-card'><h4>🤖 Banana Gun Bot</h4></div>", unsafe_allow_html=True)
-        str_lit.link_button("Abrir Banana Gun", BANANA_GUN_BOT_URL)
-
-        str_lit.markdown("<div class='content-card'><h4>⚡ Maestro Bot</h4></div>", unsafe_allow_html=True)
-        str_lit.link_button("Abrir Maestro Bot", MAESTRO_BOT_URL)
-
-        str_lit.markdown("<div class='content-card'><h4>📈 BullX Trading</h4></div>", unsafe_allow_html=True)
-        str_lit.link_button("Abrir BullX", BULKR_TRADING_URL)
+    with col2:
+        str_lit.markdown("#### 🛡️ Seguridad y Desarrollo")
+        str_lit.link_button("Solana Tracker Insights", SOLANA_TRACKER_URL)
+        str_lit.link_button("Helius RPC & Developer Cloud", HELIUS_DEV_URL)
+        str_lit.link_button("Phantom Self-Custody Wallet", PHANTOM_AFFILIATE_URL)
+        str_lit.link_button("Metaplex NFT Standards", METAPLEX_URL)
+        str_lit.link_button("Solana Foundation / Flex", SOLANAFLEX_URL)
