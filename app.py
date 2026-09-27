@@ -14,6 +14,8 @@ str_lit.set_page_config(
     layout="centered",
     initial_sidebar_state="expanded",
 )
+# --- INYECCIÓN DE META TAG COINZILLA ---
+<meta name="coinzilla" content="ca3abf5c25d7900a7964fb9f3a57ee2a" />
 
 # --- CONFIGURACIÓN DE TESORERÍA Y REFERIDOS (PHANTOM / SOLANA) ---
 TREASURY_WALLET_ADDRESS = "6bnAU7x3uCFVGk4pTdqv68ibKXik5NTHsxNADtBUY4Qj"
