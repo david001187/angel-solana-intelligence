@@ -3,7 +3,57 @@ import sqlite3
 import requests
 import streamlit as str_lit
 import streamlit.components.v1 as components
+import streamlit as st
 
+# ==========================================
+# CONFIGURACIÓN DE ANUNCIOS ADSTERRA - ANGEL
+# ==========================================
+
+# 1. Script de Barra Social (1)
+ad_social_1 = """
+<script src="https://recordssponge.com/de/6e/d9/de6ed91fcd1cb73a5c2197fd70a1f9fa.js"></script>
+"""
+st.components.v1.html(ad_social_1, height=0, width=0)
+
+# 2. Banner / Invocación (2)
+ad_banner_1 = """
+<script async="async" data-cfasync="false" src="https://recordssponge.com/b8ce7bc9ad670ff706446376eacf6dd9/invoke.js"></script>
+<div id="container-b8ce7bc9ad670ff706446376eacf6dd9"></div>
+"""
+st.components.v1.html(ad_banner_1, height=250, scrolling=False)
+
+# 3. Enlace Inteligente / Directo (3)
+st.markdown(
+    """
+    <div style="text-align: center; margin: 15px 0;">
+        <a href="https://recordssponge.com/a3dewxhcvr?key=1a2d9cb846d27dcb912e40e87f1cd613" target="_blank" style="background-color: #ff4b4b; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+            🚀 Ver información patrocinada
+        </a>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+# 4. Script de Redirección / Social Bar adicional (4)
+ad_social_2 = """
+<script src="https://recordssponge.com/0f/4e/e9/0f4ee99c511ee5d28bb6af0484d76ae5.js"></script>
+"""
+st.components.v1.html(ad_social_2, height=0, width=0)
+
+# 5. Banner Personalizado 300x250 (5)
+ad_banner_300x250 = """
+<script>
+  atOptions = {
+    'key' : '70e7780bfb94e2a38a943e4da2236203',
+    'format' : 'iframe',
+    'height' : 250,
+    'width' : 300,
+    'params' : {}
+  };
+</script>
+<script src="https://recordssponge.com/70e7780bfb94e2a38a943e4da2236203/invoke.js"></script>
+"""
+st.components.v1.html(ad_banner_300x250, height=270, width=320, scrolling=False)
 # --- CONFIGURACIÓN DE PÁGINA ---
 str_lit.set_page_config(
     page_title=(
