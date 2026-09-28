@@ -6,7 +6,7 @@ import streamlit.components.v1 as components
 import streamlit as st
 
 # ==========================================
-# CONFIGURACIÓN DE ANUNCIOS ADSTERRA - ANGEL
+# CONFIGURACIÓN COMPLETA DE ANUNCIOS ADSTERRA (1 AL 10) - ANGEL
 # ==========================================
 
 # 1. Script de Barra Social (1)
@@ -54,16 +54,81 @@ ad_banner_300x250 = """
 <script src="https://recordssponge.com/70e7780bfb94e2a38a943e4da2236203/invoke.js"></script>
 """
 st.components.v1.html(ad_banner_300x250, height=270, width=320, scrolling=False)
-# --- CONFIGURACIÓN DE PÁGINA ---
-str_lit.set_page_config(
-    page_title=(
-        "AngeL Solana Intelligence: Auditoría de Tokens, Contratos y"
-        " Transacciones"
-    ),
-    page_icon="🪽",
-    layout="centered",
-    initial_sidebar_state="expanded",
-)
+
+# 6. Banner 468x60 (6)
+ad_banner_468x60 = """
+<script>
+  atOptions = {
+    'key' : '6974aeff7dfe768c9bb6f1bc4f41b8c2',
+    'format' : 'iframe',
+    'height' : 60,
+    'width' : 468,
+    'params' : {}
+  };
+</script>
+<script src="https://recordssponge.com/6974aeff7dfe768c9bb6f1bc4f41b8c2/invoke.js"></script>
+"""
+st.components.v1.html(ad_banner_468x60, height=80, width=488, scrolling=False)
+
+# 7. Banner Vertical 160x300 (7)
+ad_banner_160x300 = """
+<script>
+  atOptions = {
+    'key' : '065915b0fcd8a8e875f0750f253ab93f',
+    'format' : 'iframe',
+    'height' : 300,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script src="https://recordssponge.com/065915b0fcd8a8e875f0750f253ab93f/invoke.js"></script>
+"""
+st.components.v1.html(ad_banner_160x300, height=320, width=180, scrolling=False)
+
+# 8. Banner Vertical 160x600 (8)
+ad_banner_160x600 = """
+<script>
+  atOptions = {
+    'key' : '94ee7415d71e74eed371c9428fb40dbf',
+    'format' : 'iframe',
+    'height' : 600,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script src="https://recordssponge.com/94ee7415d71e74eed371c9428fb40dbf/invoke.js"></script>
+"""
+st.components.v1.html(ad_banner_160x600, height=620, width=180, scrolling=False)
+
+# 9. Banner Móvil 320x50 (9)
+ad_banner_320x50 = """
+<script>
+  atOptions = {
+    'key' : 'd4e8fdc34e066ff48c36683c692dd432',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://recordssponge.com/d4e8fdc34e066ff48c36683c692dd432/invoke.js"></script>
+"""
+st.components.v1.html(ad_banner_320x50, height=70, width=340, scrolling=False)
+
+# 10. Banner Leaderboard 728x90 (10)
+ad_banner_728x90 = """
+<script>
+  atOptions = {
+    'key' : '10fcd40aed91182816ec3c5c46a7dd1f',
+    'format' : 'iframe',
+    'height' : 90,
+    'width' : 728,
+    'params' : {}
+  };
+</script>
+<script src="https://recordssponge.com/10fcd40aed91182816ec3c5c46a7dd1f/invoke.js"></script>
+"""
+st.components.v1.html(ad_banner_728x90, height=110, width=748, scrolling=False)
 
 # --- INICIALIZACIÓN DE BASE DE DATOS SQLITE PARA MÉTRICAS ---
 def init_db():
